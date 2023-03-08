@@ -3,6 +3,7 @@ import axios from '../../utils/axios';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
    const { data } = await axios.get('/posts');
+   console.log(data)
    return data;
 })
 
@@ -51,5 +52,6 @@ const postsSlice = createSlice({
       });
    }
 })
+
 
 export const postsReducer = postsSlice.reducer;
