@@ -11,6 +11,7 @@ import { fetchPosts, fetchTags } from '../redux/slices/post';
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const userData = useSelector(state => state.auth.data);
   const { posts, tags } = useSelector(state => state.posts);
   const isPostLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
@@ -35,13 +36,13 @@ export const Home = () => {
                 key={item._id}
                 _id={item._id}
                 title={item.title}
-                imageUrl={item.imageUrl}
+                imageUrl={item.imageUrl ? `http://localhost:4440${item.imageUrl}` : ''}
                 user={item.user}
                 createdAt={new Date(item.createdAt).toLocaleString()}
                 viewsCount={item.viewsCount}
                 commentsCount={3}
                 tags={item.tags}
-                isEditable
+                isEditable={userData?._id === item.user._id}
               />
           ))}
         </Grid>
